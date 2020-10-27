@@ -121,7 +121,7 @@ createElement(
 
 createElement(
   'div', {
-    id: 'buttons',
+    id: 'buttons',  
     parent: document.body
   }, [
     createElement('button', {
@@ -230,7 +230,7 @@ createElement(
 
 const logs = createElement('pre', {
   style: {
-    width: '400px',
+    width: '700px',
     height: '300px',
     overflowY: 'scroll',
     display: 'block',
