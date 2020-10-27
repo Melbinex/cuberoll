@@ -2,5 +2,5 @@
 
 All projects makes in branches
 
-- [Project1](https://github.com/Melbinex/cuberoll/tree/Project1)
-- [Project2](https://github.com/Melbinex/cuberoll/tree/Project2)
+- [CubeRoll](https://github.com/Melbinex/home-works/tree/Project1)
+- [SortImages](https://github.com/Melbinex/home-works/tree/Project2)
