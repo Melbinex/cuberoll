@@ -1,6 +1,6 @@
-# Cuberoll
+# SortImages
 
-Generate random cube values
+Generate random and sort images
 
 # Other projects
 
