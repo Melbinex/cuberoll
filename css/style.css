@@ -1,25 +1,53 @@
 
 body {
-background-color;
+  height: 100vh;
+  margin: 0;
+  display: grid;
+  place-items: center;
+  background-color: rgb(160, 153, 153);
 }
-
 img{
-  margin: 15px;
-  border: 2px solid black;
+  border: 2px solid #000000;;
+  margin: 10px;
 }
-button {
-  font-weight: 700;
-  color: white;
+button{
+  background-color: #bbb5aa; /* Green */
+  border: 0px solid;;
+  color: rgb(48, 40, 40);
+  padding: 15px 32px;
+  text-align: center;
   text-decoration: none;
-  padding: .8em 1em calc(.8em + 3px);
-  background: rgb(64,199,129);
-  box-shadow: 0 -3px rgb(53,167,110) inset;
-  transition: 0.2s;
-  margin: 20px;
-} 
-button:hover { background: rgb(53, 167, 110); }
-button:active {
-  background: rgb(33,147,90);
-  box-shadow: 0 3px rgb(33,147,90) inset;
-}
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  float: left;
+  outline: none;
 
+}
+button:hover{
+  background-color: #525252;
+  margin: px;
+}
+button:active{
+  outline: none;
+  }
+
+pre {
+  background: #f4f4f4;
+  border: 1px solid #ddd;
+  border-left: 3px solid #000000;
+  color: #666;
+  page-break-inside: avoid;
+  font-family: monospace;
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 1.6em;
+  max-width: 100%;
+  overflow: auto;
+  padding: 1em 1.5em;
+  display: block;
+  word-wrap: break-word;
+}
+pre code {
+	padding: 10px;
+	color: #333;
