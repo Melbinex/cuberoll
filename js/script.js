@@ -41,7 +41,6 @@ function createElement(tagName = '', options = {}, childs = []) {
     delete options.ref
   }
 
-
   toObject(options, element)
 
   for (let child of childs)
