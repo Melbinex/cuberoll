@@ -47,19 +47,31 @@ function toObject(from = {}, to = {}) {
 
 /**
  * @param {string} tagName
- * @param {Partial<HTMLElement> & {ref(v: HTMLDivElement) => void}} options
+ * @param {Partial<HTMLElement> & { parent: HTMLElement, ref(v: HTMLDivElement) => void}} options
  * @param {HTMLElement[]} childs
  */
 function createElement(tagName = '', options = {}, childs = []) {
   const element = document.createElement(tagName)
 
+  if(options.parent) {
+    if(options.parent instanceof HTMLElement)
+      options.parent.appendChild(elements)
+    
+    delete options.parent
+  }
+
+  if(options.ref) {
+    if (typeof options.ref == 'function')
+      options.ref(element)
+
+    delete options.ref
+  }
+
+
   toObject(options, element)
 
   for (let child of childs)
     element.appendChild(child)
-
-  if (typeof options.ref == 'function')
-    options.ref(element)
 
   return element
 }
@@ -97,22 +109,12 @@ function resetState(elementsArray = [], defaultImage = DEFAULT_IMAGE) {
     element.src = defaultImage
 }
 
-function log(...text) {
-  let outText = text.join(' ').trim()
-
-  if (logs.innerText)
-    logs.innerText += '\n'
-
-  logs.innerText += outText
-  logs.scrollTop = logs.scrollHeight
-}
-
 const elements = init(6)
 
 createElement(
   'div', {
     id: 'elements',
-    ref(el) { document.body.appendChild(el) }
+    parent: document.body
   },
   elements
 )
@@ -120,7 +122,7 @@ createElement(
 createElement(
   'div', {
     id: 'buttons',
-    ref(el) { document.body.appendChild(el) }
+    parent: document.body
   }, [
     createElement('button', {
       innerText: 'Reset state',
@@ -214,9 +216,19 @@ const logs = createElement('pre', {
     overflowY: 'scroll',
     display: 'block',
   },
-
-  ref(el) { document.body.appendChild(el) }
+  parent: document.body
 })
+
+function log(...text) {
+  let outText = text.join(' ').trim()
+
+  if (logs.innerText)
+    logs.innerText += '\n'
+
+  logs.innerText += outText
+  logs.scrollTop = logs.scrollHeight
+}
+
 
 function sort() {
   elements.sort()
