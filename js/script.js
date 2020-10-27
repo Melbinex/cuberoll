@@ -55,7 +55,7 @@ function createElement(tagName = '', options = {}, childs = []) {
 
   if(options.parent) {
     if(options.parent instanceof HTMLElement)
-      options.parent.appendChild(elements)
+      options.parent.appendChild(element)
     
     delete options.parent
   }
@@ -227,10 +227,4 @@ function log(...text) {
 
   logs.innerText += outText
   logs.scrollTop = logs.scrollHeight
-}
-
-
-function sort() {
-  elements.sort()
-  console.log(elements)
 }
