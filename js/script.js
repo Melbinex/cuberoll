@@ -93,7 +93,10 @@ createElement('div', {
 }, [
   createElement('button', {
     innerText: 'Reset state',
-    onclick: () => resetState(elements)
+    onclick: () => {
+      resetState(elements)
+      log('You reset state to default')
+    }
   }),
   createElement('button', {
     innerText: 'Start random',
@@ -106,13 +109,7 @@ createElement('div', {
 
       element.src = image
 
-      if(logs.innerText)
-        logs.innerText += '\n'
-
-      logs.innerText += `
-        You set in ${elementIndex + 1} cube value ${imageIndex + 1}
-      `.trim()
-      logs.scrollTop = logs.scrollHeight
+      log(`You set in ${elementIndex + 1} cube value ${imageIndex + 1}`)
     }
   })
 ])
@@ -126,3 +123,13 @@ const logs = createElement('pre', {
   },
   parent: document.body
 })
+
+function log(...text) {
+  let outText = text.join(' ').trim()
+
+  if (logs.innerText)
+    logs.innerText += '\n'
+
+  logs.innerText += outText
+  logs.scrollTop = logs.scrollHeight
+}
