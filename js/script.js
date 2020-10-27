@@ -98,6 +98,20 @@ createElement('div', {
       log('You reset state to default')
     }
   }),
+
+  createElement('button', {
+    innerText: 'Random state',
+    onclick: () => {
+      const state = [...PICTURES].sort(
+        () => Math.random() > 0.5 ? 1 : -1)
+
+      state.forEach((e, i) =>
+        elements[i] && (elements[i].src = e))
+      
+      log(`Your set state to random`)
+    },
+  }),
+
   createElement('button', {
     innerText: 'Start random',
     onclick: () => {
