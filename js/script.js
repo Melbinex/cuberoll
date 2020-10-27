@@ -126,7 +126,23 @@ createElement(
   }, [
     createElement('button', {
       innerText: 'Reset state',
-      onclick: () => resetState(elements),
+      onclick: () => {
+        resetState(elements)
+
+        log(`Your set state to default`)
+      },
+    }),
+    createElement('button', {
+      innerText: 'Random state',
+      onclick: () => {
+        const state = [...PICTURES].sort(
+          () => Math.random() > 0.5 ? 1 : -1)
+
+        state.forEach((e, i) =>
+          elements[i] && (elements[i].src = e.url))
+        
+        log(`Your set state to random`)
+      },
     }),
 
     createElement('button', {
@@ -168,7 +184,8 @@ createElement(
           state.reverse()
         }
 
-        state.forEach((e, i) => (elements[i].src = e.url))
+        state.forEach((e, i) => 
+          elements[i] && (elements[i].src = e.url))
 
         log(`Your sort elements by name of ${type}`)
       },
@@ -201,7 +218,8 @@ createElement(
           state.reverse()
         }
 
-        state.forEach((e, i) => (elements[i].src = e.url))
+        state.forEach((e, i) => 
+          elements[i] && (elements[i].src = e.url))
 
         log(`Your sort elements by index of ${type}`)
       },
