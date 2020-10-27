@@ -19,22 +19,33 @@ function toObject(from = {}, to = {}) {
   return to
 }
 
-
 /**
- * @param {string} tagName 
- * @param {Partial<HTMLElement> & {ref(v: HTMLDivElement) => void}} options 
- * @param {HTMLElement[]} childs 
+ * @param {string} tagName
+ * @param {Partial<HTMLElement> & { parent: HTMLElement, ref(v: HTMLDivElement) => void}} options
+ * @param {HTMLElement[]} childs
  */
 function createElement(tagName = '', options = {}, childs = []) {
   const element = document.createElement(tagName)
+
+  if(options.parent) {
+    if(options.parent instanceof HTMLElement)
+      options.parent.appendChild(element)
+    
+    delete options.parent
+  }
+
+  if(options.ref) {
+    if (typeof options.ref == 'function')
+      options.ref(element)
+
+    delete options.ref
+  }
+
 
   toObject(options, element)
 
   for (let child of childs)
     element.appendChild(child)
-
-  if (typeof options.ref == 'function')
-    options.ref(element)
 
   return element
 }
@@ -72,21 +83,14 @@ function resetState(elementsArray = [], defaultImage = DEFAULT_IMAGE) {
 
 const elements = init(4)
 
-const logs = createElement('pre', {
-  style: {
-    width: '400px',
-    height: '300px',
-    overflowY: 'scroll',
-    display: 'block'
-  }
-})
-
-const elementsContainer = createElement('div', {
-  id: 'elements'
+createElement('div', {
+  id: 'elements',
+  parent: document.body
 }, elements)
 
-const buttonsContainer = createElement('div', {
-  id: 'buttons'
+createElement('div', {
+  id: 'buttons',
+  parent: document.body
 }, [
   createElement('button', {
     innerText: 'Reset state',
@@ -114,6 +118,12 @@ const buttonsContainer = createElement('div', {
   })
 ])
 
-document.body.appendChild(elementsContainer)
-document.body.appendChild(buttonsContainer)
-document.body.appendChild(logs)
+const logs = createElement('pre', {
+  style: {
+    width: '400px',
+    height: '300px',
+    overflowY: 'scroll',
+    display: 'block'
+  },
+  parent: document.body
+})
