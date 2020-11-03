@@ -117,7 +117,7 @@ createElement('div', {
       const pairs = state.filter((e, i, a) => a.indexOf(e) !== i)
       console.log(pairs)
       
-      log(`Yor got ${new Set(pairs).size} saim pars `)
+      log(`You got ${new Set(pairs).size} same pars `)
       // const pairs = {}
 
       // state.sort((a,b)=>{
