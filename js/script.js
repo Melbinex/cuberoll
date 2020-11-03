@@ -58,7 +58,7 @@ function randArray(array = []) {
   return array[rand(0, array.length - 1)]
 }
 
-function init(length = 6, defaultImage = DEFAULT_IMAGE) {
+function init(length = 4, defaultImage = DEFAULT_IMAGE) {
   /** @type {HTMLImageElement[]} */
   const elementsArray = []
 
@@ -80,7 +80,7 @@ function resetState(elementsArray = [], defaultImage = DEFAULT_IMAGE) {
     element.src = defaultImage
 }
 
-const elements = init(6)
+const elements = init(4)
 
 createElement('div', {
   id: 'elements',
@@ -103,7 +103,7 @@ createElement('div', {
     innerText: 'Random state',
     onclick: () => {
       const state = []
-      for (i = 0; i < 6; i++) {
+      for (i = 0; i < 4; i++) {
         state[i] = PICTURES[rand(0, PICTURES.length - 1)]
       }
       // const state = [...PICTURES].sort(
