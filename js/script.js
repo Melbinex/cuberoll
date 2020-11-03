@@ -27,14 +27,14 @@ function toObject(from = {}, to = {}) {
 function createElement(tagName = '', options = {}, childs = []) {
   const element = document.createElement(tagName)
 
-  if(options.parent) {
-    if(options.parent instanceof HTMLElement)
+  if (options.parent) {
+    if (options.parent instanceof HTMLElement)
       options.parent.appendChild(element)
-    
+
     delete options.parent
   }
 
-  if(options.ref) {
+  if (options.ref) {
     if (typeof options.ref == 'function')
       options.ref(element)
 
@@ -58,7 +58,7 @@ function randArray(array = []) {
   return array[rand(0, array.length - 1)]
 }
 
-function init(length = 4, defaultImage = DEFAULT_IMAGE) {
+function init(length = 6, defaultImage = DEFAULT_IMAGE) {
   /** @type {HTMLImageElement[]} */
   const elementsArray = []
 
@@ -80,7 +80,7 @@ function resetState(elementsArray = [], defaultImage = DEFAULT_IMAGE) {
     element.src = defaultImage
 }
 
-const elements = init(4)
+const elements = init(6)
 
 createElement('div', {
   id: 'elements',
@@ -102,13 +102,28 @@ createElement('div', {
   createElement('button', {
     innerText: 'Random state',
     onclick: () => {
-      const state = [...PICTURES].sort(
-        () => Math.random() > 0.5 ? 1 : -1)
+      const state = []
+      for (i = 0; i < 6; i++) {
+        state[i] = PICTURES[rand(0, PICTURES.length - 1)]
+      }
+      // const state = [...PICTURES].sort(
+      //   () => Math.random() > 0.5 ? 1 : -1)
 
       state.forEach((e, i) =>
-        elements[i] && (elements[i].src = e))
-      
+      elements[i] && (elements[i].src = e))
+
       log(`Your set state to random`)
+      console.log(state)
+      const pairs = state.filter((e, i, a) => a.indexOf(e) !== i)
+      console.log(pairs)
+      
+      log(`Yor got ${new Set(pairs).size} saim pars `)
+      // const pairs = {}
+
+      // state.sort((a,b)=>{
+      //     (a+b in pairs)?pairs[a+b]++:pairs[a+b] = 1;
+      // })
+      // console.log(Object.values(pairs))
     },
   }),
 
@@ -147,3 +162,5 @@ function log(...text) {
   logs.innerText += outText
   logs.scrollTop = logs.scrollHeight
 }
+var arr = ["Apple", "Pear", "Mango", "Strawberry", "Apple", "Pear", "Orange"];
+
