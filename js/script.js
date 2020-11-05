@@ -3,6 +3,9 @@ const PICTURES = [
   'img/1.png', 'img/2.png', 'img/3.png',
   'img/4.png', 'img/5.png', 'img/6.png'
 ]
+//ELLEMENST
+
+
 
 function toObject(from = {}, to = {}) {
   for (let key in from) {
@@ -58,7 +61,7 @@ function randArray(array = []) {
   return array[rand(0, array.length - 1)]
 }
 
-function init(length = 4, defaultImage = DEFAULT_IMAGE) {
+function init(length = 5, defaultImage = DEFAULT_IMAGE) {
   /** @type {HTMLImageElement[]} */
   const elementsArray = []
 
@@ -80,7 +83,7 @@ function resetState(elementsArray = [], defaultImage = DEFAULT_IMAGE) {
     element.src = defaultImage
 }
 
-const elements = init(4)
+const elements = init(5)
 
 createElement('div', {
   id: 'elements',
@@ -95,41 +98,54 @@ createElement('div', {
     innerText: 'Reset state',
     onclick: () => {
       resetState(elements)
-      log('You reset state to default')
+      document.querySelectorAll('li').forEach(el => {
+        el.remove()
+      })
     }
   }),
 
   createElement('button', {
     innerText: 'Random state',
     onclick: () => {
+      let textInPre = document.createElement('li')
+      let textUl = document.getElementById(`pre`)
+
       const state = []
-      for (i = 0; i < 4; i++) {
+      for (i = 0; i < 5; i++) {
         state[i] = PICTURES[rand(0, PICTURES.length - 1)]
       }
-      // const state = [...PICTURES].sort(
-      //   () => Math.random() > 0.5 ? 1 : -1)
-
       state.forEach((e, i) =>
-      elements[i] && (elements[i].src = e))
+        elements[i] && (elements[i].src = e))
 
-      log(`Your set state to random`)
-      console.log(state)
-      const pairs = state.filter((e, i, a) => a.indexOf(e) !== i)
-      console.log(pairs)
-      
-      log(`You got ${new Set(pairs).size} same pars `)
-      // const pairs = {}
 
-      // state.sort((a,b)=>{
-      //     (a+b in pairs)?pairs[a+b]++:pairs[a+b] = 1;
-      // })
-      // console.log(Object.values(pairs))
+      const count1 = state.reduce((tally, fruit) => {
+        tally[fruit] = (tally[fruit] || 0) + 1;
+        return tally;
+      }, {})
+      for (const [key, value] of Object.entries(count1)) {
+        let tostr = key;
+        let text = tostr.replace('img/', '')
+        let text2 = text.replace('.png', '')
+
+        let textinli = createElement('div')
+        textinli.textContent = `A cube with the value ${text2}, dropped ${value} time`
+        textInPre.appendChild(textinli)
+      }
+      let textafterli = createElement('span')
+      textafterli.textContent = '_________________'
+      textInPre.appendChild(textafterli)
+
+      textUl.appendChild(textInPre)
     },
+
   }),
 
   createElement('button', {
     innerText: 'Start random',
     onclick: () => {
+      let textInPre = document.createElement('li')
+      let textUl = document.getElementById(`pre`)
+
       const elementIndex = rand(0, elements.length - 1)
       const element = elements[elementIndex]
 
@@ -138,20 +154,21 @@ createElement('div', {
 
       element.src = image
 
-      log(`You set in ${elementIndex + 1} cube value ${imageIndex + 1}`)
+      let textinli = createElement('div')
+      textinli.textContent = `You set in ${elementIndex + 1} cube value ${imageIndex + 1}`
+      textInPre.appendChild(textinli)
+
+      let textafterli = createElement('span')
+      textafterli.textContent = '_________________'
+      textInPre.appendChild(textafterli)
+
+      textUl.appendChild(textInPre)
+
     }
   })
 ])
 
-const logs = createElement('pre', {
-  style: {
-    width: '400px',
-    height: '300px',
-    overflowY: 'scroll',
-    display: 'block'
-  },
-  parent: document.body
-})
+
 
 function log(...text) {
   let outText = text.join(' ').trim()
@@ -162,5 +179,5 @@ function log(...text) {
   logs.innerText += outText
   logs.scrollTop = logs.scrollHeight
 }
-var arr = ["Apple", "Pear", "Mango", "Strawberry", "Apple", "Pear", "Orange"];
+
 

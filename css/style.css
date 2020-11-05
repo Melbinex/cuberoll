@@ -32,7 +32,7 @@ button:active{
   outline: none;
   }
 
-pre {
+/* .pre2 {
   background: #f4f4f4;
   border: 1px solid #ddd;
   border-left: 3px solid #000000;
@@ -47,7 +47,29 @@ pre {
   padding: 1em 1.5em;
   display: block;
   word-wrap: break-word;
+} */
+.wrapper {
+  display: block;
 }
-pre code {
-	padding: 10px;
-	color: #333;
+
+.pre2{
+  width: 500px;
+  height: 250px;
+  display: block;
+  padding: 0px;
+  background-color: white;
+  overflow-y: auto;
+  font-family: monospace;
+  font-size: 15px;
+
+}
+.span{
+  font-family: monospace;
+  font-size: 15px;
+  margin-top: 5px;
+  width: 100px;
+}
+.li{
+  display: flex;
+  flex-direction: column;
+}
